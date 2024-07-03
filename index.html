@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculator</title>
+
+    <style>
+        *{
+            margin: 0;padding: 0;box-sizing: border-box;
+        }
+        body{
+            width: 100%;
+            height: 100%;
+            background-color: lightblue;
+        }
+        .calculator{
+            width: 300px;
+            height: 500px;
+            background-color: rgb(4, 4, 63);
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            border-radius: 5px;
+            padding: 50px 25px;
+        }
+        form div{
+            width: 100%;
+            display: grid;
+            grid-template-columns: auto auto auto auto;
+            gap: 10px;
+            flex: none;
+        }
+        form .last-icon input:nth-child(3){
+           width: 120px;
+        }
+        form div input{
+            width: 50px;
+            height: 50px;
+            color: #fff;
+            background-color: transparent;
+            outline: none;
+            border: none;
+            box-shadow: 1px 1px 2px #2056a2, -1px -1px 2px #3e80d6;
+            border-radius: 10px;
+            margin: 5px 0;
+            cursor: pointer;
+        }
+        form div button{
+            width: 100px;
+            height: 50px;
+            color: #fff;
+            background-color: transparent;
+            outline: none;
+            border: none;
+            box-shadow: 1.5px 1.5px 2px #4474b8, -1.5px -1.5px 2px #4a74aa;
+            border-radius: 10px;
+            margin: 5px 0;
+            cursor: pointer;
+        }
+        form div .display{
+            width: 250px;
+            height: 100px;
+            margin-bottom: 30px;
+           text-align: right;
+           font-size: 2rem;
+        }
+    </style>
+</head>
+<body>
+    
+    <div class="calculator">
+        <form>
+            <div>
+                <input type="text" class="display">
+            </div>
+            <div>
+                <input type="button" value="AC">
+                <input type="button" value="DE">
+                <input type="button" value=".">
+                <input type="button" value="/">
+            </div>
+            <div>
+                <input type="button" value="7">
+                <input type="button" value="8">
+                <input type="button" value="9">
+                <input type="button" value="*">
+            </div>
+            <div>
+                <input type="button" value="4">
+                <input type="button" value="5">
+                <input type="button" value="6">
+                <input type="button" value="-">
+            </div>
+            <div>
+                <input type="button" value="1">
+                <input type="button" value="2">
+                <input type="button" value="3">
+                <input type="button" value="+">
+            </div>
+            <div class="last-icon">
+                <input type="button" value="00">
+                <input type="button" value="0">
+                <button type="button">=</button>
+            </div>
+        </form>
+    </div>
+
+    <script>
+        let num = document.querySelectorAll('input');
+        
+        let btn =  document.querySelector('button')
+        let display = document.querySelector('.display');
+       
+
+        num.forEach((val)=>{
+            val.addEventListener('click', function(e){
+                console.log(e.target.value);
+
+                display.value += e.target.value;
+
+                if(e.target.value == 'AC'){
+                    display.value = ''
+                }else if(e.target.value == 'DE'){
+                    display.value = (display.value).toString().slice(0,-3);
+                }
+               btn.addEventListener('click', function(){
+                display.value = eval(display.value)
+               })
+                
+            })
+        })
+    </script>
+</body>
+</html>
